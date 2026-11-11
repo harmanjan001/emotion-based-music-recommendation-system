@@ -1,0 +1,110 @@
+# Import libraries
+import pandas as pd
+import numpy as np
+import os
+
+# Create sample files (so code always runs in VS Code)
+def create_sample_files():
+    # CSV file
+    df_csv = pd.DataFrame({
+        'A': [1, 2, 3],
+        'B': [4, 5, 6]
+    })
+    df_csv.to_csv('sample.csv', index=False)
+
+    # Excel file
+    df_excel = pd.DataFrame({
+        'X': [10, 20, 30],
+        'Y': [40, 50, 60]
+    })
+    df_excel.to_excel('sample.xlsx', index=False)
+
+    print("Sample files created successfully.\n")
+
+
+# 1. Load from CSV
+def load_from_csv():
+    print("--- Loading from CSV ---")
+    df = pd.read_csv('sample.csv')
+    print(df.head(), "\n")
+    return df
+
+
+# 2. Load from Excel
+def load_from_excel():
+    print("--- Loading from Excel ---")
+    df = pd.read_excel('sample.xlsx')
+    print(df.head(), "\n")
+    return df
+
+
+# 3. Load from Dictionary
+def load_from_dict():
+    print("--- Loading from Dictionary ---")
+    data = {
+        'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'Score': [85, 90, 95]
+    }
+    df = pd.DataFrame(data)
+    print(df, "\n")
+    return df
+
+
+# 4. Load from NumPy
+def load_from_numpy():
+    print("--- Loading from NumPy Array ---")
+    arr = np.array([[1, 2], [3, 4], [5, 6]])
+    df = pd.DataFrame(arr, columns=['Feature1', 'Feature2'])
+    print(df, "\n")
+    return df
+
+
+# 5. Load from JSON
+def load_from_json():
+    print("--- Loading from JSON ---")
+    json_data = [
+        {"id": 1, "value": 100},
+        {"id": 2, "value": 200}
+    ]
+    df = pd.DataFrame(json_data)
+    print(df, "\n")
+    return df
+
+
+# 6. Load from URL
+def load_from_url():
+    print("--- Loading from URL ---")
+    url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+    try:
+        df = pd.read_csv(url)
+        print(df.head(), "\n")
+    except:
+        print("Internet not available.\n")
+        df = pd.DataFrame()
+    return df
+
+
+# Main function
+def main():
+    create_sample_files()
+
+    df1 = load_from_csv()
+    df2 = load_from_excel()
+    df3 = load_from_dict()
+    df4 = load_from_numpy()
+    df5 = load_from_json()
+    df6 = load_from_url()
+
+    print("--- Summary ---")
+    print("CSV Shape:", df1.shape)
+    print("Excel Shape:", df2.shape)
+    print("Dict Shape:", df3.shape)
+    print("NumPy Shape:", df4.shape)
+    print("JSON Shape:", df5.shape)
+    print("URL Shape:", df6.shape)
+
+
+# Run program
+if __name__ == "__main__":
+    main()
